@@ -2,9 +2,15 @@
 
 A Big Data Analytics mini-project built using **Apache PySpark** to analyze large-scale e-commerce transaction data, understand customer purchasing behaviour, segment customers using **RFM + K-Means**, and generate product recommendations using **ALS Collaborative Filtering**.
 
-## 🚀 Dashboard
+---
 
-The project includes a browser-based analytics dashboard containing:
+## 🚀 Live Dashboard
+
+### 🌐 [Open the E-Commerce Analytics Dashboard](https://shirshak14.github.io/bda-proj/)
+
+The dashboard provides a browser-based view of the project's analysis and results.
+
+It includes:
 
 - 📊 Key business metrics
 - 👥 Customer segmentation
@@ -13,18 +19,13 @@ The project includes a browser-based analytics dashboard containing:
 - 📈 Monthly revenue trends
 - 🤖 ALS product recommendations
 - 📋 Detailed analysis tables
-
-### 🌐 Live Dashboard
-
-**[Open E-Commerce Analytics Dashboard](./output/dashboard.html)**
-
-> If viewing the project through GitHub Pages, the dashboard will open directly in the browser.
+- 📊 Generated project visualizations
 
 ---
 
 ## 🎯 Project Aim
 
-To design and implement a Big Data pipeline using **PySpark** that processes real-world e-commerce transaction data, analyzes customer behaviour, performs customer segmentation, and provides personalized product recommendations.
+To design and implement a Big Data Analytics pipeline using **Apache PySpark** that processes real-world e-commerce transaction data, analyzes customer behaviour, performs customer segmentation, and generates personalized product recommendations.
 
 ---
 
@@ -38,7 +39,7 @@ To design and implement a Big Data pipeline using **PySpark** that processes rea
 - Segment customers using K-Means clustering.
 - Build a product recommendation system using ALS.
 - Generate business insights through visualizations.
-- Provide an interactive browser-based dashboard.
+- Present the results through a browser-based dashboard.
 
 ---
 
@@ -62,13 +63,17 @@ The dataset contains more than **1 million transaction records** from a UK-based
 - Customer ID
 - Country
 
+### Dataset Processing
+
 The original dataset contains:
 
 **1,067,371 transaction records**
 
-After cleaning:
+After data cleaning:
 
 **779,425 valid transaction records**
+
+Cancellation records were handled separately during preprocessing.
 
 ---
 
@@ -82,10 +87,11 @@ After cleaning:
 | Spark MLlib | Machine Learning |
 | K-Means | Customer segmentation |
 | ALS | Product recommendation |
-| Pandas | XLSX → CSV conversion and small aggregated results |
-| Matplotlib | Visualization |
-| Seaborn | Visualization |
+| Pandas | Data processing and aggregated results |
+| Matplotlib | Data visualization |
+| Seaborn | Data visualization |
 | HTML/CSS | Dashboard |
+| Jupyter Notebook | Analysis and experimentation |
 | VS Code | Development |
 
 ---
@@ -93,28 +99,28 @@ After cleaning:
 ## 🏗️ Project Architecture
 
 ```text
-Online Retail II Dataset
-          │
-          ▼
-   Data Ingestion
-          │
-          ▼
-   Data Cleaning
-          │
-          ▼
-   PySpark DataFrames
-          │
-     ┌────┼───────────────┐
-     ▼    ▼               ▼
-Behaviour  RFM          ALS
-Analysis   Analysis     Recommendation
-     │      │               │
-     │      ▼               │
-     │   K-Means             │
-     │   Segmentation        │
-     └──────┼────────────────┘
-            ▼
-       Visualizations
-            │
-            ▼
-        Dashboard
+                 Online Retail II Dataset
+                           │
+                           ▼
+                    Data Ingestion
+                           │
+                           ▼
+                    Data Cleaning
+                           │
+                           ▼
+                  PySpark DataFrames
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+          ▼                ▼                ▼
+   Behaviour Analysis   RFM Analysis    ALS Model
+          │                │                │
+          │                ▼                │
+          │          K-Means Clustering     │
+          │                │                │
+          └────────────────┼────────────────┘
+                           ▼
+                    Data Visualizations
+                           │
+                           ▼
+                       Dashboard
