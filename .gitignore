@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+venv311/
+.env
+
+# Raw datasets - don't upload large UCI files
+data/raw/*.xlsx
+data/raw/*.csv
+
+# Spark / temporary files
+*.parquet
+.sparkStaging/
+metastore_db/
+spark-warehouse/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/

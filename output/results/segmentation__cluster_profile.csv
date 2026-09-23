@@ -1,0 +1,5 @@
+cluster,avg_recency,avg_frequency,avg_monetary,num_customers,segment_label
+3,3.8,212.5,428612.0,4,High-value customers
+2,26.4,103.7,81356.3,35,Regular customers
+1,67.6,7.3,2946.8,3842,Occasional customers
+0,463.7,2.2,746.7,1997,Low-activity customers
