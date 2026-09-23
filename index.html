@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Commerce Big Data Analytics Dashboard</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:Segoe UI, Arial, sans-serif; background:#f4f7fb; color:#172033; }
+  .hero { background:linear-gradient(135deg,#172554,#2563eb); color:white; padding:34px 6%; }
+  .hero h1 { margin:0 0 8px; font-size:32px; }
+  .hero p { margin:0; opacity:.9; font-size:15px; }
+  .wrap { width:88%; max-width:1250px; margin:26px auto 50px; }
+  .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
+  .card { background:white; border-radius:14px; padding:20px; box-shadow:0 5px 20px rgba(20,35,70,.08); }
+  .label { color:#64748b; font-size:13px; }
+  .value { font-size:25px; font-weight:700; margin-top:7px; }
+  .section { margin-top:28px; }
+  .section h2 { margin-bottom:14px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .chart-card { background:white; border-radius:14px; padding:18px; box-shadow:0 5px 20px rgba(20,35,70,.08); }
+  .chart-card h3 { margin:0 0 5px; }
+  .chart-card p { color:#64748b; margin:0 0 14px; font-size:13px; }
+  .chart-card img { width:100%; border-radius:8px; background:#fff; }
+  .table-card { background:white; border-radius:14px; padding:18px; overflow:auto; box-shadow:0 5px 20px rgba(20,35,70,.08); }
+  .data-table { border-collapse:collapse; width:100%; font-size:13px; }
+  .data-table th, .data-table td { padding:9px 10px; border-bottom:1px solid #e5e7eb; text-align:left; }
+  .data-table th { background:#f8fafc; }
+  .segments { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .segment { background:white; padding:16px; border-radius:12px; box-shadow:0 4px 15px rgba(20,35,70,.06); }
+  .segment span { display:block; color:#64748b; font-size:13px; }
+  .segment strong { display:block; margin-top:7px; font-size:23px; }
+  .empty { color:#64748b; padding:15px 0; }
+  footer { color:#64748b; text-align:center; padding:20px; font-size:12px; }
+  @media(max-width:900px) { .cards,.segments {grid-template-columns:1fr 1fr} .grid {grid-template-columns:1fr} }
+  @media(max-width:560px) { .cards,.segments {grid-template-columns:1fr} .wrap {width:94%} }
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>E-Commerce Big Data Analytics Dashboard</h1>
+  <p>PySpark â€¢ Customer Behaviour â€¢ RFM + K-Means â€¢ ALS Recommendations</p>
+</header>
+<main class="wrap">
+  <section class="cards">
+    <div class="card"><div class="label">Total Customers</div><div class="value">5,878</div></div>
+    <div class="card"><div class="label">Transactions</div><div class="value">36,969</div></div>
+    <div class="card"><div class="label">Total Revenue</div><div class="value">Â£17,374,804.25</div></div>
+    <div class="card"><div class="label">Average Order Value</div><div class="value">Â£469.98</div></div>
+  </section>
+
+  <section class="section">
+    <h2>Customer Segmentation</h2>
+    <div class="segments"><div class='segment'><span>High-value customers</span><strong>4</strong></div><div class='segment'><span>Regular customers</span><strong>35</strong></div><div class='segment'><span>Occasional customers</span><strong>3,842</strong></div><div class='segment'><span>Low-activity customers</span><strong>1,997</strong></div></div>
+  </section>
+
+  <section class="section grid">
+    
+    <div class="chart-card">
+      <h3>Top Products by Revenue</h3>
+      <p>Products contributing the most revenue.</p>
+      <img src="output/plots/01_top_products_by_revenue.png" alt="Top Products by Revenue">
+    </div>
+    
+    
+    <div class="chart-card">
+      <h3>Revenue by Country</h3>
+      <p>Top countries by recorded revenue.</p>
+      <img src="output/plots/02_revenue_by_country.png" alt="Revenue by Country">
+    </div>
+    
+    
+    <div class="chart-card">
+      <h3>Customer Spending Distribution</h3>
+      <p>Distribution of customer spending.</p>
+      <img src="output/plots/03_customer_spending_distribution.png" alt="Customer Spending Distribution">
+    </div>
+    
+    
+    <div class="chart-card">
+      <h3>Monthly Revenue Trend</h3>
+      <p>Revenue pattern across months.</p>
+      <img src="output/plots/04_monthly_revenue_trend.png" alt="Monthly Revenue Trend">
+    </div>
+    
+    
+    <div class="chart-card">
+      <h3>Customer Segment Distribution</h3>
+      <p>Distribution of customers across K-Means segments.</p>
+      <img src="output/plots/05_customer_segment_distribution.png" alt="Customer Segment Distribution">
+    </div>
+    
+    
+    <div class="chart-card">
+      <h3>Sample Recommendations</h3>
+      <p>Products recommended by the ALS model.</p>
+      <img src="output/plots/06_sample_recommendations.png" alt="Sample Recommendations">
+    </div>
+    
+  </section>
+
+  <section class="section grid">
+    <div class="table-card"><h2>Top Products by Revenue</h2><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Description</th>
+      <th>revenue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>REGENCY CAKESTAND 3 TIER</td>
+      <td>277656.25</td>
+    </tr>
+    <tr>
+      <td>WHITE HANGING HEART T-LIGHT HOLDER</td>
+      <td>247048.01</td>
+    </tr>
+    <tr>
+      <td>PAPER CRAFT , LITTLE BIRDIE</td>
+      <td>168469.60</td>
+    </tr>
+    <tr>
+      <td>Manual</td>
+      <td>151777.67</td>
+    </tr>
+    <tr>
+      <td>JUMBO BAG RED RETROSPOT</td>
+      <td>134307.44</td>
+    </tr>
+    <tr>
+      <td>POSTAGE</td>
+      <td>124648.04</td>
+    </tr>
+    <tr>
+      <td>ASSORTED COLOUR BIRD ORNAMENT</td>
+      <td>124351.86</td>
+    </tr>
+    <tr>
+      <td>PARTY BUNTING</td>
+      <td>103283.38</td>
+    </tr>
+    <tr>
+      <td>MEDIUM CERAMIC TOP STORAGE JAR</td>
+      <td>81416.73</td>
+    </tr>
+    <tr>
+      <td>PAPER CHAIN KIT 50'S CHRISTMAS</td>
+      <td>76598.18</td>
+    </tr>
+  </tbody>
+</table></div>
+    <div class="table-card"><h2>Top Products by Quantity</h2><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Description</th>
+      <th>total_qty_sold</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>WORLD WAR 2 GLIDERS ASSTD DESIGNS</td>
+      <td>105185</td>
+    </tr>
+    <tr>
+      <td>WHITE HANGING HEART T-LIGHT HOLDER</td>
+      <td>91757</td>
+    </tr>
+    <tr>
+      <td>PAPER CRAFT , LITTLE BIRDIE</td>
+      <td>80995</td>
+    </tr>
+    <tr>
+      <td>ASSORTED COLOUR BIRD ORNAMENT</td>
+      <td>78234</td>
+    </tr>
+    <tr>
+      <td>MEDIUM CERAMIC TOP STORAGE JAR</td>
+      <td>77916</td>
+    </tr>
+    <tr>
+      <td>JUMBO BAG RED RETROSPOT</td>
+      <td>74224</td>
+    </tr>
+    <tr>
+      <td>BROCADE RING PURSE</td>
+      <td>70082</td>
+    </tr>
+    <tr>
+      <td>PACK OF 60 PINK PAISLEY CAKE CASES</td>
+      <td>54592</td>
+    </tr>
+    <tr>
+      <td>60 TEATIME FAIRY CAKE CASES</td>
+      <td>52828</td>
+    </tr>
+    <tr>
+      <td>PACK OF 72 RETRO SPOT CAKE CASES</td>
+      <td>45129</td>
+    </tr>
+  </tbody>
+</table></div>
+    <div class="table-card"><h2>Monthly Revenue</h2><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>InvoiceYearMonth</th>
+      <th>revenue</th>
+      <th>num_orders</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2009-12</td>
+      <td>683504.01</td>
+      <td>1512</td>
+    </tr>
+    <tr>
+      <td>2010-01</td>
+      <td>555802.67</td>
+      <td>1011</td>
+    </tr>
+    <tr>
+      <td>2010-02</td>
+      <td>504558.95</td>
+      <td>1104</td>
+    </tr>
+    <tr>
+      <td>2010-03</td>
+      <td>696978.47</td>
+      <td>1524</td>
+    </tr>
+    <tr>
+      <td>2010-04</td>
+      <td>591982.00</td>
+      <td>1329</td>
+    </tr>
+    <tr>
+      <td>2010-05</td>
+      <td>597833.38</td>
+      <td>1377</td>
+    </tr>
+    <tr>
+      <td>2010-06</td>
+      <td>636371.13</td>
+      <td>1497</td>
+    </tr>
+    <tr>
+      <td>2010-07</td>
+      <td>589736.17</td>
+      <td>1381</td>
+    </tr>
+    <tr>
+      <td>2010-08</td>
+      <td>602224.60</td>
+      <td>1293</td>
+    </tr>
+    <tr>
+      <td>2010-09</td>
+      <td>829013.95</td>
+      <td>1689</td>
+    </tr>
+  </tbody>
+</table></div>
+    <div class="table-card"><h2>Revenue by Country</h2><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Country</th>
+      <th>revenue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>United Kingdom</td>
+      <td>14389234.90</td>
+    </tr>
+    <tr>
+      <td>EIRE</td>
+      <td>616570.54</td>
+    </tr>
+    <tr>
+      <td>Netherlands</td>
+      <td>554038.09</td>
+    </tr>
+    <tr>
+      <td>Germany</td>
+      <td>425019.71</td>
+    </tr>
+    <tr>
+      <td>France</td>
+      <td>348768.96</td>
+    </tr>
+    <tr>
+      <td>Australia</td>
+      <td>169283.46</td>
+    </tr>
+    <tr>
+      <td>Spain</td>
+      <td>108332.49</td>
+    </tr>
+    <tr>
+      <td>Switzerland</td>
+      <td>100061.94</td>
+    </tr>
+    <tr>
+      <td>Sweden</td>
+      <td>91515.82</td>
+    </tr>
+    <tr>
+      <td>Denmark</td>
+      <td>68580.69</td>
+    </tr>
+  </tbody>
+</table></div>
+    <div class="table-card"><h2>Recommendations â€” Customer 14911</h2><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>StockCode</th>
+      <th>CustomerID</th>
+      <th>StockCodeIndex</th>
+      <th>score</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>84012</td>
+      <td>14911</td>
+      <td>1254</td>
+      <td>1.409507</td>
+      <td>MAGIC SHEEP WOOL GROWING FROM PAPER</td>
+    </tr>
+    <tr>
+      <td>21875</td>
+      <td>14911</td>
+      <td>657</td>
+      <td>1.346677</td>
+      <td>KINGS CHOICE MUG</td>
+    </tr>
+    <tr>
+      <td>21868</td>
+      <td>14911</td>
+      <td>243</td>
+      <td>1.341201</td>
+      <td>POTTING SHED TEA MUG</td>
+    </tr>
+    <tr>
+      <td>85071A</td>
+      <td>14911</td>
+      <td>1500</td>
+      <td>1.338509</td>
+      <td>BLUE CHARLIE+LOLA PERSONAL DOORSIGN</td>
+    </tr>
+    <tr>
+      <td>85232B</td>
+      <td>14911</td>
+      <td>704</td>
+      <td>1.317406</td>
+      <td>SET/3 RUSSIAN DOLL STACKING TINS</td>
+    </tr>
+  </tbody>
+</table></div>
+  </section>
+</main>
+<footer>Generated from the project's actual output/results and output/plots files.</footer>
+</body>
+</html>
+
